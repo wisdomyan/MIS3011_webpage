@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,19 +12,19 @@
             --light: #f8f9fa;
             --dark: #202124;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+        
         body {
             background-color: var(--light);
             color: var(--dark);
@@ -32,7 +32,7 @@
             scroll-behavior: smooth;
             animation: fadeIn 0.8s ease-out;
         }
-
+        
         header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
@@ -46,20 +46,20 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-
+        
         .cities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             padding: 3rem 0;
         }
-
+        
         .city-card {
             background: linear-gradient(to bottom, white 0%, #f1f3f4 100%);
             border-radius: 10px;
@@ -69,43 +69,43 @@
             opacity: 0;
             animation: fadeIn 0.8s ease-out forwards;
         }
-
+        
         .city-card:nth-child(1) { animation-delay: 0.2s; }
         .city-card:nth-child(2) { animation-delay: 0.4s; }
         .city-card:nth-child(3) { animation-delay: 0.6s; }
         .city-card:nth-child(4) { animation-delay: 0.8s; }
-
+        
         .city-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-
+        
         .city-image-container {
             width: 100%;
             height: 200px;
             overflow: hidden;
         }
-
+        
         .city-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: all 0.5s ease;
         }
-
+        
         .city-card:hover .city-image {
             transform: scale(1.1);
         }
-
+        
         .city-content {
             padding: 1.5rem;
         }
-
+        
         h2 {
             color: var(--primary);
             margin-bottom: 0.5rem;
         }
-
+        
         .btn {
             display: inline-block;
             background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
@@ -119,13 +119,15 @@
             cursor: pointer;
             margin: 2rem auto;
             box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            position: relative;
+            overflow: hidden;
         }
-
+        
         .btn:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 7px 20px rgba(26, 115, 232, 0.4);
         }
-
+        
         .btn::after {
             content: '';
             position: absolute;
@@ -137,21 +139,21 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
+        
         .btn:hover::after {
             opacity: 1;
         }
-
+        
         .btn span {
             position: relative;
             z-index: 1;
         }
-
+        
         .btn-container {
             text-align: center;
             padding-bottom: 2rem;
         }
-
+        
         footer {
             text-align: center;
             padding: 2rem;
@@ -159,12 +161,12 @@
             color: white;
             margin-top: 2rem;
         }
-
+        
         @media (max-width: 768px) {
             .cities-grid {
                 grid-template-columns: 1fr;
             }
-
+            
             .city-card {
                 animation: none;
                 opacity: 1;
@@ -178,14 +180,15 @@
             <h1>Featured Chinese Cities</h1>
         </div>
     </header>
-
+    
     <main>
         <div class="container">
             <div class="cities-grid">
                 <!-- Chongqing -->
                 <div class="city-card">
                     <div class="city-image-container">
-                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/重庆景观照片.png" alt="Chongqing Hotpot" class="city-image">
+                        <!-- REPLACE WITH AI-GENERATED CHONGQING HOTPOT IMAGE -->
+                        <img src="chongqing.jpg" alt="Chongqing Hotpot" class="city-image">
                     </div>
                     <div class="city-content">
                         <h2>Chongqing</h2>
@@ -196,11 +199,12 @@
                         </p>
                     </div>
                 </div>
-
+                
                 <!-- Chengdu -->
                 <div class="city-card">
                     <div class="city-image-container">
-                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/成都景观照片 (1).png" alt="Chengdu Panda" class="city-image">
+                        <!-- REPLACE WITH AI-GENERATED CHENGDU PANDA IMAGE -->
+                        <img src="chengdu.jpg" alt="Chengdu Panda" class="city-image">
                     </div>
                     <div class="city-content">
                         <h2>Chengdu</h2>
@@ -211,11 +215,12 @@
                         </p>
                     </div>
                 </div>
-
+                
                 <!-- Wuhan -->
                 <div class="city-card">
                     <div class="city-image-container">
-                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/生成武汉风景图.png" alt="Wuhan Yellow Crane Tower" class="city-image">
+                        <!-- REPLACE WITH AI-GENERATED WUHAN TOWER IMAGE -->
+                        <img src="wuhan.jpg" alt="Wuhan Yellow Crane Tower" class="city-image">
                     </div>
                     <div class="city-content">
                         <h2>Wuhan</h2>
@@ -226,11 +231,12 @@
                         </p>
                     </div>
                 </div>
-
+                
                 <!-- Shenzhen -->
                 <div class="city-card">
                     <div class="city-image-container">
-                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/深圳风景图 (1).png" alt="Shenzhen Skyline" class="city-image">
+                        <!-- REPLACE WITH AI-GENERATED SHENZHEN SKYLINE IMAGE -->
+                        <img src="shenzhen.jpg" alt="Shenzhen Skyline" class="city-image">
                     </div>
                     <div class="city-content">
                         <h2>Shenzhen</h2>
@@ -242,14 +248,13 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Return to Homepage Button -->
+            
             <div class="btn-container">
                 <a href="index.html" class="btn"><span>Return to Homepage</span></a>
             </div>
         </div>
     </main>
-
+    
     <footer>
         <div class="container">
             <p>&copy; 2023 Chinese City Tourism Project</p>
