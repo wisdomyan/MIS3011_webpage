@@ -1,449 +1,442 @@
-{\rtf1\ansi\ansicpg936\cocoartf2758
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Cities | Tourism Recommendations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #fbbc05;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --text-light: #f8f9fa;
+            --text-dark: #202124;
+            --bg-light: #f8f9fa;
+            --bg-dark: #121212;
+            --header-light: white;
+            --header-dark: #1f1f1f;
+        }
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="zh-CN">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>Chinese Cities | Tourism Recommendations</title>\
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">\
-    <style>\
-        :root \{\
-            --primary: #1a73e8;\
-            --secondary: #34a853;\
-            --accent: #fbbc05;\
-            --light: #f8f9fa;\
-            --dark: #202124;\
-            --text-light: #f8f9fa;\
-            --text-dark: #202124;\
-            --bg-light: #f8f9fa;\
-            --bg-dark: #121212;\
-            --header-light: white;\
-            --header-dark: #1f1f1f;\
-        \}\
-\
-        [data-theme="dark"] \{\
-            --primary: #8ab4f8;\
-            --secondary: #81c995;\
-            --accent: #fdd663;\
-            --light: #2d2d2d;\
-            --dark: #e8eaed;\
-            --text-light: #202124;\
-            --text-dark: #e8eaed;\
-            --bg-light: #121212;\
-            --bg-dark: #f8f9fa;\
-            --header-light: #1f1f1f;\
-            --header-dark: white;\
-        \}\
-\
-        * \{\
-            margin: 0;\
-            padding: 0;\
-            box-sizing: border-box;\
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\
-            transition: background-color 0.3s, color 0.3s;\
-        \}\
-\
-        body \{\
-            background-color: var(--bg-light);\
-            color: var(--text-dark);\
-            line-height: 1.6;\
-            scroll-behavior: smooth;\
-            overflow-x: hidden;\
-        \}\
-\
-        /* Loading Spinner */\
-        .loader \{\
-            position: fixed;\
-            top: 0;\
-            left: 0;\
-            width: 100%;\
-            height: 100%;\
-            background-color: rgba(255, 255, 255, 0.8);\
-            display: flex;\
-            justify-content: center;\
-            align-items: center;\
-            z-index: 9999;\
-            backdrop-filter: blur(5px);\
-        \}\
-\
-        .spinner \{\
-            width: 50px;\
-            height: 50px;\
-            border: 5px solid rgba(26, 115, 232, 0.3);\
-            border-radius: 50%;\
-            border-top-color: var(--primary);\
-            animation: spin 1s ease-in-out infinite;\
-        \}\
-\
-        @keyframes spin \{\
-            to \{ transform: rotate(360deg); \}\
-        \}\
-\
-        /* Particle Animation */\
-        #particles-js \{\
-            position: absolute;\
-            width: 100%;\
-            height: 100%;\
-            top: 0;\
-            left: 0;\
-            z-index: 0;\
-        \}\
-\
-        /* Header with Scroll Effect */\
-        header \{\
-            background-color: var(--header-light);\
-            color: var(--text-dark);\
-            padding: 1.5rem;\
-            position: fixed;\
-            top: 0;\
-            width: 100%;\
-            z-index: 1000;\
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\
-            transition: all 0.3s ease;\
-            display: flex;\
-            justify-content: space-between;\
-            align-items: center;\
-        \}\
-\
-        header.shrink \{\
-            padding: 0.5rem 1.5rem;\
-            background-color: rgba(255, 255, 255, 0.95);\
-            backdrop-filter: blur(10px);\
-        \}\
-\
-        [data-theme="dark"] header.shrink \{\
-            background-color: rgba(31, 31, 31, 0.95);\
-        \}\
-\
-        .header-content \{\
-            display: flex;\
-            justify-content: space-between;\
-            align-items: center;\
-            width: 100%;\
-            max-width: 1200px;\
-            margin: 0 auto;\
-        \}\
-\
-        /* Theme Toggle */\
-        .theme-toggle \{\
-            display: flex;\
-            align-items: center;\
-            cursor: pointer;\
-            background: none;\
-            border: none;\
-            color: var(--text-dark);\
-            font-size: 1.2rem;\
-        \}\
-\
-        .theme-toggle i \{\
-            margin-right: 0.5rem;\
-        \}\
-\
-        /* 3D Carousel */\
-        .carousel-container \{\
-            max-width: 1000px;\
-            margin: 2rem auto;\
-            position: relative;\
-            perspective: 1000px;\
-        \}\
-\
-        .city-carousel \{\
-            position: relative;\
-            width: 100%;\
-            height: 400px;\
-            transform-style: preserve-3d;\
-        \}\
-\
-        .carousel-item \{\
-            position: absolute;\
-            width: 300px;\
-            height: 400px;\
-            left: 50%;\
-            top: 50%;\
-            transform: translate(-50%, -50%);\
-            transition: all 0.5s ease;\
-            background: white;\
-            border-radius: 10px;\
-            overflow: hidden;\
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);\
-        \}\
-\
-        [data-theme="dark"] .carousel-item \{\
-            background: #2d2d2d;\
-        \}\
-\
-        .carousel-item img \{\
-            width: 100%;\
-            height: 250px;\
-            object-fit: cover;\
-        \}\
-\
-        .carousel-content \{\
-            padding: 1rem;\
-        \}\
-\
-        .carousel-nav \{\
-            display: flex;\
-            justify-content: center;\
-            margin: 1rem 0;\
-        \}\
-\
-        .carousel-nav button \{\
-            background: var(--primary);\
-            color: white;\
-            border: none;\
-            padding: 0.5rem 1rem;\
-            margin: 0 0.5rem;\
-            border-radius: 5px;\
-            cursor: pointer;\
-            transition: all 0.3s ease;\
-        \}\
-\
-        .carousel-nav button:hover \{\
-            background: var(--secondary);\
-            transform: translateY(-2px);\
-        \}\
-\
-        /* City Info Sections */\
-        .city-info \{\
-            max-width: 1200px;\
-            margin: 2rem auto;\
-            padding: 2rem;\
-            background: linear-gradient(to bottom, var(--header-light) 0%, #f1f3f4 100%);\
-            border-radius: 10px;\
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);\
-        \}\
-\
-        [data-theme="dark"] .city-info \{\
-            background: linear-gradient(to bottom, var(--header-light) 0%, #3d3d3d 100%);\
-        \}\
-\
-        /* Button Styles */\
-        .btn \{\
-            display: inline-block;\
-            background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);\
-            color: white;\
-            padding: 0.8rem 2rem;\
-            border-radius: 50px;\
-            text-decoration: none;\
-            font-weight: bold;\
-            transition: all 0.3s ease;\
-            border: none;\
-            cursor: pointer;\
-            margin: 2rem auto;\
-            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);\
-            position: relative;\
-            overflow: hidden;\
-        \}\
-\
-        .btn:hover \{\
-            transform: translateY(-3px) scale(1.05);\
-            box-shadow: 0 7px 20px rgba(26, 115, 232, 0.4);\
-        \}\
-\
-        .btn::after \{\
-            content: '';\
-            position: absolute;\
-            top: 0;\
-            left: 0;\
-            width: 100%;\
-            height: 100%;\
-            background: linear-gradient(to right, var(--secondary) 0%, var(--primary) 100%);\
-            opacity: 0;\
-            transition: opacity 0.3s ease;\
-        \}\
-\
-        .btn:hover::after \{\
-            opacity: 1;\
-        \}\
-\
-        .btn span \{\
-            position: relative;\
-            z-index: 1;\
-        \}\
-\
-        .btn-container \{\
-            text-align: center;\
-            padding-bottom: 2rem;\
-        \}\
-\
-        /* Footer */\
-        footer \{\
-            text-align: center;\
-            padding: 2rem;\
-            background: linear-gradient(to right, var(--dark) 0%, #3c4043 100%);\
-            color: white;\
-        \}\
-\
-        [data-theme="dark"] footer \{\
-            background: linear-gradient(to right, #3c4043 0%, var(--dark) 100%);\
-        \}\
-\
-        .social-icons \{\
-            display: flex;\
-            justify-content: center;\
-            margin: 1rem 0;\
-        \}\
-\
-        .social-icons a \{\
-            color: white;\
-            margin: 0 0.5rem;\
-            font-size: 1.5rem;\
-            transition: transform 0.3s ease;\
-        \}\
-\
-        .social-icons a:hover \{\
-            transform: translateY(-3px) scale(1.1);\
-        \}\
-\
-        /* Mobile Optimization */\
-        @media (max-width: 768px) \{\
-            .carousel-container \{\
-                height: 350px;\
-            \}\
-\
-            .carousel-item \{\
-                width: 250px;\
-                height: 350px;\
-            \}\
-\
-            .carousel-item img \{\
-                height: 200px;\
-            \}\
-\
-            header \{\
-                padding: 1rem;\
-            \}\
-\
-            header.shrink \{\
-                padding: 0.5rem 1rem;\
-            \}\
-\
-            .city-info \{\
-                padding: 1rem;\
-            \}\
-        \}\
-\
-        /* Reduced motion preference */\
-        @media (prefers-reduced-motion: reduce) \{\
-            * \{\
-                animation: none !important;\
-                transition: none !important;\
-            \}\
-        \}\
-    </style>\
-</head>\
-<body>\
-    <!-- Loading Spinner -->\
-    <div class="loader">\
-        <div class="spinner"></div>\
-    </div>\
-\
-    <!-- Header with Particles -->\
-    <header>\
-        <div class="header-content">\
-            <h1>Featured Chinese Cities</h1>\
-            <button class="theme-toggle" aria-label="Toggle dark mode">\
-                <i class="fas fa-moon"></i> Dark Mode\
-            </button>\
-        </div>\
-        <div id="particles-js"></div>\
-    </header>\
-    \
-    <main>\
-        <div class="container">\
-            <!-- 3D Carousel -->\
-            <div class="carousel-container">\
-                <div class="city-carousel">\
-                    <div class="carousel-item" style="transform: rotateY(0deg) translateZ(300px)">\
-                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/\uc0\u37325 \u24198 \u26223 \u35266 \u29031 \u29255 .png" alt="Chongqing Hotpot">\
-                        <div class="carousel-content">\
-                            <h2>Chongqing</h2>\
-                            <p>Mountain City with spicy hotpot and river views</p>\
-                        </div>\
-                    </div>\
-                    <div class="carousel-item" style="transform: rotateY(72deg) translateZ(300px)">\
-                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/\uc0\u25104 \u37117 \u26223 \u35266 \u29031 \u29255  (1).png" alt="Chengdu Panda">\
-                        <div class="carousel-content">\
-                            <h2>Chengdu</h2>\
-                            <p>Home of giant pandas and Sichuan cuisine</p>\
-                        </div>\
-                    </div>\
-                    <div class="carousel-item" style="transform: rotateY(144deg) translateZ(300px)">\
-                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/\uc0\u29983 \u25104 \u27494 \u27721 \u39118 \u26223 \u22270 .png" alt="Wuhan Yellow Crane Tower">\
-                        <div class="carousel-content">\
-                            <h2>Wuhan</h2>\
-                            <p>Yellow Crane Tower and breakfast culture</p>\
-                        </div>\
-                    </div>\
-                    <div class="carousel-item" style="transform: rotateY(216deg) translateZ(300px)">\
-                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/\uc0\u28145 \u22323 \u39118 \u26223 \u22270  (1).png" alt="Shenzhen Skyline">\
-                        <div class="carousel-content">\
-                            <h2>Shenzhen</h2>\
-                            <p>Tech hub with futuristic architecture</p>\
-                        </div>\
-                    </div>\
-                </div>\
-                <div class="carousel-nav">\
-                    <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>\
-                    <button class="next-btn"><i class="fas fa-chevron-right"></i></button>\
-                </div>\
-            </div>\
-\
-            <!-- City Information Sections -->\
-            <div class="city-info">\
-                <h2>Chongqing</h2>\
-                <p>\
-                    Known as the "Mountain City," Chongqing offers breathtaking river views and \
-                    mouth-numbing hotpot. Our recommendations highlight the best spicy food spots \
-                    along with Yangtze River cruises and the Hongya Cave night market.\
-                </p>\
-            </div>\
-\
-            <div class="city-info">\
-                <h2>Chengdu</h2>\
-                <p>\
-                    The capital of Sichuan province is famous for its giant pandas and laid-back \
-                    teahouse culture. Our routes include the Panda Base, Wuhou Temple, and \
-                    authentic Sichuan opera performances with face-changing acts.\
-                </p>\
-            </div>\
-\
-            <div class="city-info">\
-                <h2>Wuhan</h2>\
-                <p>\
-                    Straddling the Yangtze River, Wuhan features the iconic Yellow Crane Tower \
-                    and delicious breakfast culture. Our recommendations cover East Lake cherry \
-                    blossoms, Hubei Provincial Museum, and the best re gan mian noodle shops.\
-                </p>\
-            </div>\
-\
-            <div class="city-info">\
-                <h2>Shenzhen</h2>\
-                <p>\
-                    China's tech hub boasts futuristic architecture and theme parks. Our routes \
-                    include Window of the World, Dafen Oil Painting Village, and the electronics \
-                    markets of Huaqiangbei, plus the best dim sum restaurants in this modern metropolis.\
-                </p>\
-            </div>\
-\
-            <div class="btn-container">\
-                <a href="index.html" class="btn"><span>Return to Homepage</span></a>\
-            </div>\
-        </div>\
-    </main>\
-    \
-    <footer>\
-        <div class="container">\
-            <div class="social-icons">\
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>\
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>\
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>\
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>\
-                <a href="#" aria-label="Pinterest"><i class}
+        [data-theme="dark"] {
+            --primary: #8ab4f8;
+            --secondary: #81c995;
+            --accent: #fdd663;
+            --light: #2d2d2d;
+            --dark: #e8eaed;
+            --text-light: #202124;
+            --text-dark: #e8eaed;
+            --bg-light: #121212;
+            --bg-dark: #f8f9fa;
+            --header-light: #1f1f1f;
+            --header-dark: white;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(26, 115, 232, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Particle Animation */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Header with Scroll Effect */
+        header {
+            background-color: var(--header-light);
+            color: var(--text-dark);
+            padding: 1.5rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header.shrink {
+            padding: 0.5rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] header.shrink {
+            background-color: rgba(31, 31, 31, 0.95);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle i {
+            margin-right: 0.5rem;
+        }
+
+        /* 3D Carousel */
+        .carousel-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .city-carousel {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            transform-style: preserve-3d;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .carousel-item {
+            background: #2d2d2d;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .carousel-content {
+            padding: 1rem;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .carousel-nav button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-nav button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* City Info Sections */
+        .city-info {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: linear-gradient(to bottom, var(--header-light) 0%, #f1f3f4 100%);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .city-info {
+            background: linear-gradient(to bottom, var(--header-light) 0%, #3d3d3d 100%);
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 2rem auto;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 7px 20px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary) 0%, var(--primary) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-container {
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(to right, var(--dark) 0%, #3c4043 100%);
+            color: white;
+        }
+
+        [data-theme="dark"] footer {
+            background: linear-gradient(to right, #3c4043 0%, var(--dark) 100%);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .carousel-container {
+                height: 350px;
+            }
+
+            .carousel-item {
+                width: 250px;
+                height: 350px;
+            }
+
+            .carousel-item img {
+                height: 200px;
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            header.shrink {
+                padding: 0.5rem 1rem;
+            }
+
+            .city-info {
+                padding: 1rem;
+            }
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div class="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header with Particles -->
+    <header>
+        <div class="header-content">
+            <h1>Featured Chinese Cities</h1>
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i> Dark Mode
+            </button>
+        </div>
+        <div id="particles-js"></div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <!-- 3D Carousel -->
+            <div class="carousel-container">
+                <div class="city-carousel">
+                    <div class="carousel-item" style="transform: rotateY(0deg) translateZ(300px)">
+                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/重庆景观照片.png" alt="Chongqing Hotpot">
+                        <div class="carousel-content">
+                            <h2>Chongqing</h2>
+                            <p>Mountain City with spicy hotpot and river views</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="transform: rotateY(72deg) translateZ(300px)">
+                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/成都景观照片 (1).png" alt="Chengdu Panda">
+                        <div class="carousel-content">
+                            <h2>Chengdu</h2>
+                            <p>Home of giant pandas and Sichuan cuisine</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="transform: rotateY(144deg) translateZ(300px)">
+                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/生成武汉风景图.png" alt="Wuhan Yellow Crane Tower">
+                        <div class="carousel-content">
+                            <h2>Wuhan</h2>
+                            <p>Yellow Crane Tower and breakfast culture</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="transform: rotateY(216deg) translateZ(300px)">
+                        <img src="/Users/wisdom/Desktop/MIS3011/PPT/深圳风景图 (1).png" alt="Shenzhen Skyline">
+                        <div class="carousel-content">
+                            <h2>Shenzhen</h2>
+                            <p>Tech hub with futuristic architecture</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                    <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- City Information Sections -->
+            <div class="city-info">
+                <h2>Chongqing</h2>
+                <p>
+                    Known as the "Mountain City," Chongqing offers breathtaking river views and 
+                    mouth-numbing hotpot. Our recommendations highlight the best spicy food spots 
+                    along with Yangtze River cruises and the Hongya Cave night market.
+                </p>
+            </div>
+
+            <div class="city-info">
+                <h2>Chengdu</h2>
+                <p>
+                    The capital of Sichuan province is famous for its giant pandas and laid-back 
+                    teahouse culture. Our routes include the Panda Base, Wuhou Temple, and 
+                    authentic Sichuan opera performances with face-changing acts.
+                </p>
+            </div>
+
+            <div class="city-info">
+                <h2>Wuhan</h2>
+                <p>
+                    Straddling the Yangtze River, Wuhan features the iconic Yellow Crane Tower 
+                    and delicious breakfast culture. Our recommendations cover East Lake cherry 
+                    blossoms, Hubei Provincial Museum, and the best re gan mian noodle shops.
+                </p>
+            </div>
+
+            <div class="city-info">
+                <h2>Shenzhen</h2>
+                <p>
+                    China's tech hub boasts futuristic architecture and theme parks. Our routes 
+                    include Window of the World, Dafen Oil Painting Village, and the electronics 
+                    markets of Huaqiangbei, plus the best dim sum restaurants in this modern metropolis.
+                </p>
+            </div>
+
+            <div class="btn-container">
+                <a href="index.html" class="btn"><span>Return to Homepage</span></a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="Pinterest"><i class

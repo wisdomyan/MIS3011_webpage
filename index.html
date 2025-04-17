@@ -1,254 +1,247 @@
-{\rtf1\ansi\ansicpg936\cocoartf2758
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Recommendations Based on Users with Similar Preferences</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #fbbc05;
+            --light: #f8f9fa;
+            --dark: #202124;
+        }
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="zh-CN">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>Route Recommendations Based on Users with Similar Preferences</title>\
-    <style>\
-        :root \{\
-            --primary: #1a73e8;\
-            --secondary: #34a853;\
-            --accent: #fbbc05;\
-            --light: #f8f9fa;\
-            --dark: #202124;\
-        \}\
-\
-        * \{\
-            margin: 0;\
-            padding: 0;\
-            box-sizing: border-box;\
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\
-        \}\
-\
-        body \{\
-            background-color: var(--light);\
-            color: var(--dark);\
-            line-height: 1.6;\
-            scroll-behavior: smooth;\
-        \}\
-\
-        header \{\
-            background-color: var(--primary);\
-            color: white;\
-            padding: 1rem;\
-            position: sticky;\
-            top: 0;\
-            z-index: 100;\
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\
-        \}\
-\
-        .container \{\
-            max-width: 1200px;\
-            margin: 0 auto;\
-            padding: 0 2rem;\
-        \}\
-\
-        .hero \{\
-            position: relative;\
-            display: flex;\
-            flex-direction: column;\
-            align-items: center;\
-            justify-content: center;\
-            min-height: 100vh;\
-            text-align: center;\
-            padding: 2rem;\
-        \}\
-\
-        /* \uc0\u35270 \u39057 \u23481 \u22120 \u26679 \u24335  */\
-        .video-container \{\
-            width: 100%;\
-            max-width: 800px;\
-            margin: 2rem 0;\
-            border-radius: 10px;\
-            overflow: hidden;\
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);\
-            position: relative;\
-        \}\
-\
-        video \{\
-            width: 100%;\
-            height: auto;\
-            display: block;\
-        \}\
-\
-        .video-poster \{\
-            position: absolute;\
-            top: 0;\
-            left: 0;\
-            width: 100%;\
-            height: 100%;\
-            background: url('/Users/wisdom/Desktop/MIS3011/PPT/\uc0\u29983 \u25104 \u30340 \u35270 \u39057 .mp4') no-repeat center center;\
-            background-size: cover;\
-            z-index: 1;\
-        \}\
-\
-        video::-webkit-media-controls-play-button,\
-        video::-webkit-media-controls-panel \{\
-            opacity: 0;\
-            pointer-events: none;\
-            transition: opacity 0.3s;\
-        \}\
-\
-        video:hover::-webkit-media-controls-play-button,\
-        video:focus::-webkit-media-controls-play-button,\
-        video:hover::-webkit-media-controls-panel,\
-        video:focus::-webkit-media-controls-panel \{\
-            opacity: 1;\
-            pointer-events: auto;\
-        \}\
-\
-        .intro \{\
-            max-width: 700px;\
-            margin: 0 auto 2rem;\
-            font-size: 1.1rem;\
-            opacity: 0;\
-            transform: translateY(20px);\
-            animation: fadeIn 0.8s ease-out forwards;\
-        \}\
-\
-        @keyframes fadeIn \{\
-            to \{ opacity: 1; transform: translateY(0); \}\
-        \}\
-\
-        /* \uc0\u25353 \u38062 \u26679 \u24335  */\
-        .btn \{\
-            display: inline-block;\
-            background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);\
-            color: white;\
-            padding: 0.8rem 2rem;\
-            border-radius: 50px;\
-            text-decoration: none;\
-            font-weight: bold;\
-            transition: all 0.3s ease;\
-            border: none;\
-            cursor: pointer;\
-            margin-top: 1rem;\
-            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);\
-            position: relative;\
-            overflow: hidden;\
-        \}\
-\
-        .btn:hover \{\
-            transform: translateY(-3px) scale(1.05);\
-            box-shadow: 0 7px 20px rgba(26, 115, 232, 0.4);\
-        \}\
-\
-        .btn::after \{\
-            content: '';\
-            position: absolute;\
-            top: 0;\
-            left: 0;\
-            width: 100%;\
-            height: 100%;\
-            background: linear-gradient(to right, var(--secondary) 0%, var(--primary) 100%);\
-            opacity: 0;\
-            transition: opacity 0.3s ease;\
-        \}\
-\
-        .btn:hover::after \{\
-            opacity: 1;\
-        \}\
-\
-        .btn span \{\
-            position: relative;\
-            z-index: 1;\
-        \}\
-\
-        footer \{\
-            text-align: center;\
-            padding: 2rem;\
-            background: linear-gradient(to right, var(--dark) 0%, #3c4043 100%);\
-            color: white;\
-        \}\
-\
-        @media (max-width: 768px) \{\
-            h1 \{\
-                font-size: 2rem;\
-            \}\
-\
-            .hero \{\
-                min-height: auto;\
-                padding: 3rem 1rem;\
-            \}\
-\
-            .video-container \{\
-                animation: none;\
-            \}\
-\
-            .btn \{\
-                width: 100%;\
-                padding: 1rem;\
-            \}\
-        \}\
-\
-        /* \uc0\u20943 \u23569 \u21160 \u30011 \u23545 \u20110 \u20559 \u22909 \u35774 \u32622  */\
-        @media (prefers-reduced-motion: reduce) \{\
-            * \{\
-                animation: none !important;\
-                transition: none !important;\
-            \}\
-\
-            video::-webkit-media-controls-play-button,\
-            video::-webkit-media-controls-panel \{\
-                display: none;\
-            \}\
-        \}\
-    </style>\
-</head>\
-<body>\
-    <header>\
-        <div class="container">\
-            <h1>Route Recommendations Based on Users with Similar Preferences</h1>\
-        </div>\
-    </header>\
-\
-    <main>\
-        <section class="hero">\
-            <!-- \uc0\u35270 \u39057 \u20803 \u32032  -->\
-            <div class="video-container">\
-                <video autoplay muted loop poster="/Users/wisdom/Desktop/MIS3011/PPT/\uc0\u35270 \u39057 \u23553 \u38754 .jpg" controls>\
-                    <source src="/Users/wisdom/Desktop/MIS3011/PPT/\uc0\u29983 \u25104 \u30340 \u35270 \u39057 .mp4" type="video/mp4">\
-                    Your browser does not support the video tag.\
-                </video>\
-                <!-- \uc0\u21487 \u36873 \u30340 \u23553 \u38754 \u22270 \u29255 \u65292 \u22914 \u26524 \u27983 \u35272 \u22120 \u19981 \u25903 \u25345 \u35270 \u39057  -->\
-                <div class="video-poster"></div>\
-            </div>\
-\
-            <p class="intro">\
-                Our AI-powered recommendation system helps travelers discover the best routes through Chinese cities \
-                based on preferences of similar users. Experience personalized itineraries that match your interests, \
-                from culinary adventures to cultural landmarks.\
-            </p>\
-            \
-            <a href="content.html" class="btn"><span>Explore Cities</span></a>\
-        </section>\
-    </main>\
-\
-    <footer>\
-        <div class="container">\
-            <p>&copy; 2023 Chinese City Tourism Project</p>\
-        </div>\
-    </footer>\
-\
-    <!-- \uc0\u21487 \u36873 \u65306 JavaScript \u29992 \u20110 \u26356 \u39640 \u32423 \u30340 \u35270 \u39057 \u25511 \u21046  -->\
-    <script>\
-        const video = document.querySelector('video');\
-\
-        // \uc0\u26816 \u27979 \u29992 \u25143 \u26159 \u21542 \u28857 \u20987 \u20102 \u35270 \u39057 \u21306 \u22495 \u20197 \u25163 \u21160 \u25773 \u25918 \u65288 \u26576 \u20123 \u27983 \u35272 \u22120 \u33258 \u21160 \u25773 \u25918 \u31574 \u30053 \u65289 \
-        video.addEventListener('click', () => \{\
-            if (video.paused) \{\
-                video.play();\
-            \} else \{\
-                video.pause();\
-            \}\
-        \});\
-    </script>\
-</body>\
-</html>}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* 视频容器样式 */
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-poster {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/Users/wisdom/Desktop/MIS3011/PPT/生成的视频.mp4') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        video::-webkit-media-controls-play-button,
+        video::-webkit-media-controls-panel {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        video:hover::-webkit-media-controls-play-button,
+        video:focus::-webkit-media-controls-play-button,
+        video:hover::-webkit-media-controls-panel,
+        video:focus::-webkit-media-controls-panel {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .intro {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 7px 20px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary) 0%, var(--primary) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(to right, var(--dark) 0%, #3c4043 100%);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 3rem 1rem;
+            }
+
+            .video-container {
+                animation: none;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 1rem;
+            }
+        }
+
+        /* 减少动画对于偏好设置 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            video::-webkit-media-controls-play-button,
+            video::-webkit-media-controls-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Route Recommendations Based on Users with Similar Preferences</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <!-- 视频元素 -->
+            <div class="video-container">
+                <video autoplay muted loop poster="/Users/wisdom/Desktop/MIS3011/PPT/视频封面.jpg" controls>
+                    <source src="/Users/wisdom/Desktop/MIS3011/PPT/生成的视频.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <!-- 可选的封面图片，如果浏览器不支持视频 -->
+                <div class="video-poster"></div>
+            </div>
+
+            <p class="intro">
+                Our AI-powered recommendation system helps travelers discover the best routes through Chinese cities 
+                based on preferences of similar users. Experience personalized itineraries that match your interests, 
+                from culinary adventures to cultural landmarks.
+            </p>
+            
+            <a href="content.html" class="btn"><span>Explore Cities</span></a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Chinese City Tourism Project</p>
+        </div>
+    </footer>
+
+    <!-- 可选：JavaScript 用于更高级的视频控制 -->
+    <script>
+        const video = document.querySelector('video');
+
+        // 检测用户是否点击了视频区域以手动播放（某些浏览器自动播放策略）
+        video.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        });
+    </script>
+</body>
+</html>
